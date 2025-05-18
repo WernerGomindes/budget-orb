@@ -1,7 +1,6 @@
-import * as React from 'react';
 import type { FC } from 'react';
 import { useRef, useState, useEffect } from 'react';
-import { useFrame, useLoader } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -212,9 +211,9 @@ const PulsatingSun: FC = () => {
   });
 
   // Animation for the sun
-  useFrame((state) => {
+  useFrame(({ clock }) => {
     if (sunRef.current) {
-      const t = state.clock.getElapsedTime();
+      const t = clock.getElapsedTime();
       
       // Update shader time uniform
       sunMaterial.uniforms.time.value = t;
@@ -228,7 +227,7 @@ const PulsatingSun: FC = () => {
     }
 
     if (glowRef.current) {
-      const t = state.clock.getElapsedTime();
+      const t = clock.getElapsedTime();
       // Inverse pulsating for the glow
       const glowScale = 1.3 + Math.sin(t * 4) * 0.15;
       glowRef.current.scale.setScalar(glowScale);
@@ -339,7 +338,7 @@ export const BudgetOrb: FC = () => {
   const { projectData, setSelectedFeature } = useProjectStore();
   const groupRef = useRef<THREE.Group>(null);
   
-  useFrame((state: { clock: { getElapsedTime: () => number } }) => {
+  useFrame(() => {
     if (groupRef.current) {
       groupRef.current.rotation.y += 0.001;
     }

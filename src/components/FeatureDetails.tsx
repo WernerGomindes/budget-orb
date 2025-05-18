@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProjectStore } from '../store/projectStore';

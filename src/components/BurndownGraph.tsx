@@ -10,7 +10,6 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
-import { theme } from '../utils/theme';
 
 interface BurndownData {
   date: string;

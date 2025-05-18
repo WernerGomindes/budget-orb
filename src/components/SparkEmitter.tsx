@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { System, Emitter, Rate, Life, Mass, Radius, Vector3D, SpriteRenderer } from 'three-nebula';
+import { System, Emitter, Rate, Life, Mass, Radius, SpriteRenderer } from 'three-nebula';
 
 interface SparkEmitterProps {
   onSparkComplete?: () => void;
@@ -24,9 +24,6 @@ export function SparkEmitter({ onSparkComplete, position }: SparkEmitterProps) {
       blending: THREE.AdditiveBlending,
       transparent: true,
     });
-    
-    // Create points object
-    const points = new THREE.Points(geometry, material);
     
     // Create emitter with proper configuration
     const emitter = new Emitter()

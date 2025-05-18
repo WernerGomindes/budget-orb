@@ -58,7 +58,7 @@ export function FeatureDrawer({ isOpen }: FeatureDrawerProps) {
     // Draw axes
     svg.append('g')
       .attr('transform', `translate(0,${height - margin.bottom})`)
-      .call(axisBottom(xScale).tickFormat((domainValue: Date | number | { valueOf(): number }, index: number) => {
+      .call(axisBottom(xScale).tickFormat((domainValue: Date | number | { valueOf(): number }) => {
         const date = new Date(domainValue.valueOf());
         return timeFormat('%m/%d')(date);
       }));
