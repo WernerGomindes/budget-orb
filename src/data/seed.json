@@ -1,0 +1,11 @@
+{
+  "project": "Turbine Data Connect",
+  "ratePerHour": 120,
+  "features": [
+    { "id": 1, "name": "Telemetry API", "plannedHrs": 160, "burnedHrs": 96, "lastCommit": "ce1e23d" },
+    { "id": 2, "name": "Alert Engine", "plannedHrs": 120, "burnedHrs": 88, "lastCommit": "af832a9" },
+    { "id": 3, "name": "Reporting UI", "plannedHrs": 200, "burnedHrs": 124, "lastCommit": "1d3c55b" },
+    { "id": 4, "name": "Ingestion Lambda", "plannedHrs": 80, "burnedHrs": 72, "lastCommit": "44e79bf" }
+  ],
+  "timestamp": "2025-05-13T14:05:00Z"
+} 
