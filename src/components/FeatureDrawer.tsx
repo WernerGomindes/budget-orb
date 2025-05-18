@@ -58,7 +58,10 @@ export function FeatureDrawer({ isOpen }: FeatureDrawerProps) {
     // Draw axes
     svg.append('g')
       .attr('transform', `translate(0,${height - margin.bottom})`)
-      .call(axisBottom(xScale).tickFormat(timeFormat('%m/%d')));
+      .call(axisBottom(xScale).tickFormat((domainValue: Date | number | { valueOf(): number }, index: number) => {
+        const date = new Date(domainValue.valueOf());
+        return timeFormat('%m/%d')(date);
+      }));
 
     svg.append('g')
       .attr('transform', `translate(${margin.left},0)`)

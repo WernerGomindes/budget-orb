@@ -346,7 +346,10 @@ export const BudgetOrb: FC = () => {
   });
 
   const handleFeatureSelect = (id: number): void => {
-    setSelectedFeature(id);
+    const feature = projectData.features.find(f => f.id === id);
+    if (feature) {
+      setSelectedFeature(id);
+    }
   };
 
   return (

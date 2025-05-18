@@ -28,19 +28,19 @@ export function SparkEmitter({ onSparkComplete, position }: SparkEmitterProps) {
     // Create points object
     const points = new THREE.Points(geometry, material);
     
-    // Create emitter with proper method chaining
-    const emitter = new Emitter();
-    
-    // Configure emitter properties individually
-    emitter.rate = new Rate(new Vector3D(4, 6), new Vector3D(0, 0));
-    emitter.addInitializer(new Mass(1));
-    emitter.addInitializer(new Radius(0.1, 0.3));
-    emitter.addInitializer(new Life(0.5, 1));
-    emitter.addInitializer(new Vector3D(position[0], position[1], position[2]));
+    // Create emitter with proper configuration
+    const emitter = new Emitter()
+      .setRate(new Rate(4, 6))
+      .addInitializers([
+        new Mass(1),
+        new Radius(0.1, 0.3),
+        new Life(0.5, 1)
+      ])
+      .setPosition({x: position[0], y: position[1], z: position[2]});
 
     // Add renderer
     const spriteRenderer = new SpriteRenderer(scene, THREE);
-    emitter.addRenderer(spriteRenderer);
+    system.addRenderer(spriteRenderer);
 
     // Add emitter to system
     system.addEmitter(emitter);
@@ -48,7 +48,11 @@ export function SparkEmitter({ onSparkComplete, position }: SparkEmitterProps) {
     systemRef.current = system;
 
     // Start the system
-    system.emit();
+    system.emit({
+      onStart: () => {},
+      onUpdate: () => {},
+      onEnd: () => onSparkComplete?.()
+    });
 
     return () => {
       geometry.dispose();
@@ -68,10 +72,12 @@ export function SparkEmitter({ onSparkComplete, position }: SparkEmitterProps) {
       requestAnimationFrame(animate);
     };
 
-    const animationId = requestAnimationFrame(animate);
+    animate();
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (systemRef.current) {
+        systemRef.current.destroy();
+      }
     };
   }, []);
 

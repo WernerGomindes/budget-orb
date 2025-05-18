@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { FC } from 'react';
 import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
